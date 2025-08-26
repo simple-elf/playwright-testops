@@ -12,7 +12,6 @@ env:
   ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
   ALLURE_RESULTS: playwright-report
   ALLURE_TESTPLAN_PATH: "./testplan.json"
-  GH_BRANCH: ${{ github.ref_name }}
   ALLURE_LAUNCH_TAGS: ${{ github.ref_name }}
 
 jobs:
@@ -24,10 +23,7 @@ jobs:
 
       - name: Print branch name
         run: |
-          echo "GITHUB_REF: ${GITHUB_REF##*/}"
-          echo "GH_BRANCH: ${GH_BRANCH}"
           echo "github.ref_name: ${{ github.ref_name }}
-          echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - uses: actions/setup-node@v4
         with:
@@ -58,8 +54,6 @@ jobs:
 
       - name: Run Playwright tests
         run: allurectl watch -- npx playwright test
-#        env:
-#          ALLURE_LAUNCH_TAGS: ${{ env.BRANCH_NAME }}
 
       - uses: actions/upload-artifact@v4
         with:
