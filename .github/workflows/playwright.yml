@@ -12,7 +12,8 @@ env:
   ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
   ALLURE_RESULTS: playwright-report
   ALLURE_TESTPLAN_PATH: "./testplan.json"
-  ALLURE_LAUNCH_TAGS: "${GITHUB_REF##*/}"
+  GH_BRANCH: ${{ github.ref_name }}
+  ALLURE_LAUNCH_TAGS: "$GH_BRANCH"
 
 jobs:
   test-run:
