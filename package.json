@@ -1,0 +1,17 @@
+{
+  "name": "playwright-testops",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@playwright/test": "1.55.0",
+    "allure-js-commons": "3.3.3",
+    "allure-playwright": "3.3.3"
+  }
+}
