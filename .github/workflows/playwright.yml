@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: Playwright
 on:
   push:
     branches: [ main, master ]
@@ -12,9 +12,10 @@ env:
   ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
   ALLURE_RESULTS: playwright-report
   ALLURE_TESTPLAN_PATH: "./testplan.json"
+  ALLURE_LAUNCH_TAGS: "${GITHUB_REF##*/}"
 
 jobs:
-  test:
+  test-run:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -28,16 +29,16 @@ jobs:
       run: npm ci
 
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      run: npx playwright install chromium --with-deps
 
     - uses: allure-framework/setup-allurectl@v1
       with:
-        allure-endpoint: "https://testops.xyz"
+        allure-endpoint: ${{ env.ALLURE_ENDPOINT }}
         allure-token: ${{ secrets.ALLURE_TOKEN }}
-        allure-project-id: 1
+        allure-project-id: ${{ env.ALLURE_PROJECT_ID }}
 
     - name: Get Test Plan
-      run: allurectl job-run plan --output-file {{ env.ALLURE_TESTPLAN_PATH }}
+      run: allurectl job-run plan --output-file ${{ env.ALLURE_TESTPLAN_PATH }}
 
     - name: Run Playwright tests
       run: allurectl watch -- npx playwright test
