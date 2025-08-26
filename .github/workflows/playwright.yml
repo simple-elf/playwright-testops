@@ -56,11 +56,11 @@ jobs:
       - name: Get Test Plan
         run: allurectl job-run plan --output-file ${{ env.ALLURE_TESTPLAN_PATH }}
 
-      - name: Run Playwright tests
-        run: allurectl watch -- npx playwright test
-
       - name: Show testplan file
         run: cat ${{ env.ALLURE_TESTPLAN_PATH }} || true
+
+      - name: Run Playwright tests
+        run: allurectl watch -- npx playwright test
 
       - uses: actions/upload-artifact@v4
         with:
