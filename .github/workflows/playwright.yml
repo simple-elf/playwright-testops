@@ -23,7 +23,7 @@ jobs:
 
       - name: Print branch name
         run: |
-          echo "github.ref_name: ${{ github.ref_name }}
+          echo "github.ref_name: ${{ github.ref_name }}"
 
       - uses: actions/setup-node@v4
         with:
