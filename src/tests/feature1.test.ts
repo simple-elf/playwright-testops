@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import * as allure from "allure-js-commons";
 
+// new line
 test('Авто сценарий 3 @allure.id:3', async ({ page }) => {
   await allure.owner("kostya");
   await allure.step("Авто шаг 1", async () => {});
