@@ -13,7 +13,7 @@ env:
   ALLURE_RESULTS: playwright-report
   ALLURE_TESTPLAN_PATH: "./testplan.json"
   GH_BRANCH: ${{ github.ref_name }}
-  ALLURE_LAUNCH_TAGS: ${{ env.GH_BRANCH }}
+  ALLURE_LAUNCH_TAGS: ${{ github.ref_name }}
 
 jobs:
   test-run:
@@ -24,7 +24,9 @@ jobs:
 
       - name: Print branch name
         run: |
-          echo "Current branch: ${GITHUB_REF##*/}"
+          echo "GITHUB_REF: ${GITHUB_REF##*/}"
+          echo "GH_BRANCH: ${GH_BRANCH}"
+          echo "github.ref_name: ${{ github.ref_name }}
           echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - uses: actions/setup-node@v4
