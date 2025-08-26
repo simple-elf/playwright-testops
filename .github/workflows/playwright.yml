@@ -64,9 +64,11 @@ jobs:
           name: playwright-report
           path: ${{ env.ALLURE_RESULTS }}/
           retention-days: 5
+          compression-level: 1
 
       - uses: actions/upload-artifact@v4
         with:
           name: testplan.json
           path: ${{ env.ALLURE_TESTPLAN_PATH }}
           retention-days: 5
+          compression-level: 0
